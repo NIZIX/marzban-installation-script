@@ -1,5 +1,5 @@
 # 🚀 Marzban Auto-Install Script
-This script automates the installation and configuration of Marzban. It also sets up Nginx as a reverse proxy for Marzban and creates an admin user with sudo privileges.
+This script automates the installation and configuration of [Marzban](https://github.com/Gozargah/Marzban). It also sets up Nginx as a reverse proxy for Marzban and creates an admin user with sudo privileges.
 
 ## 🎯 Requirements
 - 🖥️ Fresh Debian/Ubuntu server (recommended)
