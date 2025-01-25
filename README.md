@@ -26,9 +26,9 @@ This script automates the installation and configuration of [Marzban](https://gi
 
 ```
 git clone https://github.com/NIZIX/marzban-installation-script.git
-cd marzban-script
-chmod +x marzban-install.sh
-./marzban-install.sh
+cd marzban-installation-script
+chmod +x marzban-script.sh
+./marzban-script.sh
 ```
 - Follow the on-screen instructions:
 
