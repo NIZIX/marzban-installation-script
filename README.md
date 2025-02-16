@@ -22,7 +22,7 @@ This script automates the installation and configuration of [Marzban](https://gi
 - Configures Nginx as a reverse proxy.
 
 ## 💻 Usage
-- Clone the repository to your server, and run script:
+- Clone the repository to your server and run script with command:
 
 ```
 git clone https://github.com/NIZIX/marzban-installation-script.git
@@ -46,3 +46,55 @@ chmod +x marzban-script.sh
 `Marzban logs: /var/log/marzban/`
 
 `Nginx logs: /var/log/nginx/`
+
+
+---
+
+# 🚀 Скрипт автоматической установки Marzban
+Этот скрипт автоматизирует установку и настройку [Marzban](https://github.com/Gozargah/Marzban). 
+Он также настраивает Nginx как обратный прокси для Marzban и создает администратора с правами sudo.
+
+## 🎯 Требования
+- 🖥️ Чистый сервер Debian/Ubuntu (рекомендуется)
+- 🔑 Привилегии sudo
+- 🌐 `git`
+
+## ✨ Возможности
+- Устанавливает необходимые зависимости.
+
+- Предоставляет выбор базы данных:
+
+  - `SQLite`
+
+  - `MySQL`
+
+  - `MariaDB`
+
+- Устанавливает Marzban.
+
+- Настраивает Nginx как обратный прокси.
+
+## 💻 Использование
+- Клонируйте репозиторий на ваш сервер и запустите скрипт командой:
+```
+git clone https://github.com/NIZIX/marzban-installation-script.git
+cd marzban-installation-script
+chmod +x marzban-script.sh
+./marzban-script.sh
+```
+- Следуйте инструкциям на экране:
+
+- Выберите базу данных (SQLite, MySQL или MariaDB). 
+
+  - **ℹ️ Если контейнер запустится после выбора, нажмите CTRL+C для продолжения**
+
+- Введите IP-адрес или доменное имя вашего сервера.
+
+- Создайте администратора для Marzban.
+
+- Страница Marzban будет доступна по адресу: `http://your-domain-or-ip/dashboard`
+
+## 🔍 Логи и устранение неполадок
+`Логи Marzban: /var/log/marzban/`
+
+`Логи Nginx: /var/log/nginx/`
