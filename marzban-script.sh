@@ -93,6 +93,76 @@ echo
 echo "Creating admin user for Marzban..."
 marzban cli admin create --sudo
 
+# --- Xray config generation ---
+echo
+echo "===== Запуск генератора конфига Xray ====="
+
+# Возвращаемся в директорию скрипта, чтобы найти файл шаблона
+cd - > /dev/null
+
+TEMPLATE_FILE="xray_config.template.json"
+
+# --- Шаг 1: Получаем Private Key ---
+echo -n "1. Получение нового Private Key... "
+# Выполняем команду, ищем строку с "Private key:", и берем третье слово из этой строки
+PRIVATE_KEY=$(sudo docker exec marzban-marzban-1 xray x25519 | grep 'Private key:' | awk '{print $3}')
+
+# Проверяем, что ключ получен
+if [ -z "$PRIVATE_KEY" ]; then
+    echo "ОШИБКА!"
+    echo "Не удалось получить Private Key из контейнера. Убедитесь, что контейнер 'marzban-marzban-1' запущен."
+else
+    echo "OK"
+fi
+
+# --- Шаг 2: Генерируем Short ID ---
+echo -n "2. Генерация нового Short ID... "
+SHORT_ID=$(openssl rand -hex 8)
+echo "OK"
+
+# --- Шаг 3: Проверяем наличие шаблона ---
+if [ ! -f "$TEMPLATE_FILE" ]; then
+    echo "ОШИБКА: Файл шаблона '$TEMPLATE_FILE' не найден. Убедитесь, что он лежит в той же папке, что и скрипт."
+    exit 1
+fi
+
+# --- Шаг 4: Заменяем метки и создаем новый конфиг ---
+echo -n "3. Создание нового конфига... "
+
+# Создаем временный файл, чтобы не было проблем с правами доступа
+TEMP_FILE=$(mktemp)
+
+# Используем sed для замены
+sed -e "s/\"PRIVATE_KEY_PLACEHOLDER\"/\"$PRIVATE_KEY\"/" \
+    -e "s/\"SHORT_ID_PLACEHOLDER\"/\"$SHORT_ID\"/" \
+    "$TEMPLATE_FILE" > "$TEMP_FILE"
+echo "OK"
+
+# --- Шаг 5: Копирование конфига в контейнер и перезапуск ---
+echo -n "4. Копирование конфига в контейнер... "
+sudo docker cp "$TEMP_FILE" marzban-marzban-1:/code/xray_config.json
+if [ $? -eq 0 ]; then
+    echo "OK"
+else
+    echo "ОШИБКА!"
+    rm -f "$TEMP_FILE"
+    exit 1
+fi
+
+rm -f "$TEMP_FILE"
+
+echo -n "5. Перезапуск контейнера Marzban... "
+sudo docker restart marzban-marzban-1
+if [ $? -eq 0 ]; then
+    echo "OK"
+    echo "===== Готово ====="
+else
+    echo "ОШИБКА!"
+    exit 1
+fi
+# --- End of Xray config generation ---
+
+
 echo
 echo
 echo "The Marzban page will be available at http://$server_name/dashboard"
