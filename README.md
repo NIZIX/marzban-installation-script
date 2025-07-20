@@ -1,6 +1,10 @@
 # 🚀 Marzban Auto-Install Script
 This script automates the installation and configuration of [Marzban](https://github.com/Gozargah/Marzban). It also sets up Nginx as a reverse proxy for Marzban and creates an admin user with sudo privileges.
 
+## Updates
+
+- 20.07.2025: Added `vless`/`vmess`/`trojan` support
+
 ## 🎯 Requirements
 - 🖥️ Fresh Debian/Ubuntu server (recommended)
 - 🔑 Sudo privileges
@@ -53,6 +57,10 @@ chmod +x marzban-script.sh
 # 🚀 Скрипт автоматической установки Marzban
 Этот скрипт автоматизирует установку и настройку [Marzban](https://github.com/Gozargah/Marzban). 
 Он также настраивает Nginx как обратный прокси для Marzban и создает администратора с правами sudo.
+
+## Обновления
+
+- 20.07.2025: Добавлена поддержка `vless`/`vmess`/`trojan`
 
 ## 🎯 Требования
 - 🖥️ Чистый сервер Debian/Ubuntu (рекомендуется)
