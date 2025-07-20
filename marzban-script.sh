@@ -262,25 +262,25 @@ echo
 echo "===== Creating Marzban Admin User ====="
 marzban cli admin create --sudo
 
-# Display the generated config for the user to copy
-if [ -f "$OUTPUT_FILE" ]; then
-    echo
-    echo "********************************************************************************"
-    echo "********************* Xray Configuration (Core Settings) *********************"
-    echo "********************************************************************************"
-    echo
-    echo 
-    sudo cat "$OUTPUT_FILE"
-    echo
-    echo 
-fi
+# # Display the generated config for the user to copy
+# if [ -f "$OUTPUT_FILE" ]; then
+#     echo
+#     echo "********************************************************************************"
+#     echo "********************* Xray Configuration (Core Settings) *********************"
+#     echo "********************************************************************************"
+#     echo
+#     echo 
+#     sudo cat "$OUTPUT_FILE"
+#     echo
+#     echo 
+# fi
 
-# Display the final URL
-echo
-echo "================================================================================"
-echo "Please copy the config above and paste it into the Core Settings"
-echo "on the Marzban dashboard (gear icon in the top right corner)."
-echo "don't forget to save the changes and restart core"
+# # Display the final URL
+# echo
+# echo "================================================================================"
+# echo "Please copy the config above and paste it into the Core Settings"
+# echo "on the Marzban dashboard (gear icon in the top right corner)."
+# echo "don't forget to save the changes and restart core"
 echo "================================================================================"
 echo "The Marzban dashboard is now available at: http://$server_name/dashboard"
 echo "================================================================================"
